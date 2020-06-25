@@ -2,18 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { RouteProps } from "react-router";
 
-import { fadeIn } from "../animations";
 import { Container } from "../containerStyles";
 
 const Main = styled(Container)`
-  display: flex;
-  position: relative;
-  min-width: 100%;
-  min-height: 100vh;
-  background-color: #004e97;
-  animation: 0.8s ${fadeIn} ease-out;
-  overflow: hidden;
-  transition: 0.6s;
   > .page-content .page-enter {
     opacity: 0.01;
   }
@@ -28,7 +19,6 @@ const Main = styled(Container)`
   > .page-content .page-exit.page-exit-active {
     opacity: 0.01;
     transition: opacity 300ms ease-in;
-    height: 100vh;
   }
 `;
 

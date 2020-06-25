@@ -20,12 +20,6 @@ const SignUpModal: React.FC<Props> = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const signupSubmit = async () => {
-    notify(
-      "Sign Up Success",
-      "User has been added sucessfully",
-      NotificationType.Default
-    );
-
     setErrorMessage("");
 
     if (!values.username) {

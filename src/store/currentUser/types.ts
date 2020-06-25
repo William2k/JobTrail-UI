@@ -1,9 +1,6 @@
 import { Action } from "redux";
 
-import {
-  UserResponse,
-  User
-} from "../../global/models/user-models";
+import { User } from "../../global/models/user-models";
 import { CurrentUserActionTypes } from "./actions";
 
 export interface CurrentUserState {
@@ -19,7 +16,7 @@ export interface GetUserRequest
 
 export interface GetUserSuccess
   extends Action<CurrentUserActionTypes.GETUSER_SUCCESS> {
-  payload: UserResponse;
+  payload: User;
 }
 
 export interface GetUserCanceled
@@ -33,7 +30,7 @@ export interface SignInRequest
 
 export interface SignInSuccess
   extends Action<CurrentUserActionTypes.SIGNIN_SUCCESS> {
-  payload: UserResponse;
+  payload: User;
 }
 
 export interface SignInFailure
@@ -59,7 +56,6 @@ export interface SignUpPasswordFailure
 
 export interface SignUpFailure
   extends Action<CurrentUserActionTypes.SIGNUP_FAILURE> {}
-
 
 export type CurrentUserActions =
   | GetUserRequest

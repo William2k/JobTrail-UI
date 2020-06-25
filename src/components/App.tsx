@@ -15,6 +15,7 @@ import initialiser from "../appInitialiser";
 import { currentUserActions } from "../store/currentUser/actions";
 import { useConfig } from "../global/config";
 import Home from "./Home";
+import Zones from "./Zones";
 
 Axios.defaults.baseURL = useConfig.apiBaseURL;
 
@@ -40,9 +41,13 @@ const App: React.FC = () => {
             <Switch location={location}>
               <Route exact path="/" component={Home} />
               <PrivateRoute
-                exact
                 path="/account"
                 component={Account}
+                authorised={currentUser.isLoggedIn}
+              />
+              <PrivateRoute
+                path="/zones"
+                component={Zones}
                 authorised={currentUser.isLoggedIn}
               />
             </Switch>

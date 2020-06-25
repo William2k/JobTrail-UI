@@ -103,11 +103,18 @@ const Nav: React.FC = () => {
       <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
           {currentUser.isLoggedIn ? (
-            <NavItem>
-              <NavLink to="/account" className="nav-link">
-                Account
-              </NavLink>
-            </NavItem>
+            <>
+              <NavItem>
+                <NavLink to="/zones" className="nav-link">
+                  Zones
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/account" className="nav-link">
+                  Account
+                </NavLink>
+              </NavItem>
+            </>
           ) : (
             <>
               <NavItem>

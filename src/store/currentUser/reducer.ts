@@ -7,12 +7,13 @@ const initialState = {
   isLoggedIn: false,
   loginAttempts: 0,
   user: {
+    id: "",
     username: "",
     firstName: "",
     lastName: "",
     emailAddress: "",
     roles: [],
-    isActive: false
+    active: false
   }
 } as CurrentUserState;
 
@@ -64,7 +65,6 @@ export default (
         loginAttempts: state.loginAttempts + 1
       };
     default:
+      return state;
   }
-
-  return state;
 };
