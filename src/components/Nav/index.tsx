@@ -61,7 +61,7 @@ const DropDownMenuElem = styled(DropdownMenu)`
   }
 `;
 
-enum NavModals {
+enum NavModal {
   None,
   Signin,
   Signup,
@@ -72,7 +72,7 @@ const Nav: React.FC = () => {
   const currentUser = useSelector(getCurrentUserSelector);
   const user = useSelector(getUserSelector);
 
-  const [modal, setModal] = useState(NavModals.None);
+  const [modal, setModal] = useState(NavModal.None);
 
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -82,16 +82,16 @@ const Nav: React.FC = () => {
 
   useEffect(() => {
     if (currentUser.isLoggedIn) {
-      setModal(NavModals.None);
+      setModal(NavModal.None);
     }
   }, [currentUser.isLoggedIn]);
 
   const handleCloseModal = () => {
-    setModal(NavModals.None);
+    setModal(NavModal.None);
   };
 
   const handleSignUpUserSubmmit = () => {
-    setModal(NavModals.Signin);
+    setModal(NavModal.Signin);
   };
 
   return (
@@ -120,7 +120,7 @@ const Nav: React.FC = () => {
               <NavItem>
                 <span
                   className={`${styles.modalLink} nav-link`}
-                  onClick={() => setModal(NavModals.Signin)}
+                  onClick={() => setModal(NavModal.Signin)}
                 >
                   Signin
                 </span>
@@ -128,16 +128,16 @@ const Nav: React.FC = () => {
               <NavItem>
                 <span
                   className={`${styles.modalLink} nav-link`}
-                  onClick={() => setModal(NavModals.Signup)}
+                  onClick={() => setModal(NavModal.Signup)}
                 >
                   Signup
                 </span>
               </NavItem>
 
-              {modal === NavModals.Signin && (
+              {modal === NavModal.Signin && (
                 <SignInModal showModal={true} toggle={handleCloseModal} />
               )}
-              {modal === NavModals.Signup && (
+              {modal === NavModal.Signup && (
                 <SignUpModal
                   showModal={true}
                   toggle={handleCloseModal}

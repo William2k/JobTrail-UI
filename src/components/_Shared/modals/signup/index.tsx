@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import Axios from "axios";
+import axios from "axios";
 
 import useForm from "../../hooks/useForm";
 import styles from "./index.module.scss";
@@ -41,7 +41,7 @@ const SignUpModal: React.FC<Props> = (props) => {
     setIsPosting(true);
 
     try {
-      await Axios.post("account/signup", payload);
+      await axios.post("account/signup", payload);
 
       props.userSubmited();
 

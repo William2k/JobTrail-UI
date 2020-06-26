@@ -3,7 +3,9 @@ import { UserZonesActionTypes } from "./actions";
 
 const initialState = {
   isFetching: false,
+  isPosting: false,
   lastFetch: null,
+  lastPost: null,
   zones: [],
 } as UserZonesState;
 
@@ -24,6 +26,12 @@ export default (
     case UserZonesActionTypes.GETUSERZONES_CANCELED:
     case UserZonesActionTypes.GETUSERZONES_FAILURE:
       return { ...state, isFetching: false };
+    case UserZonesActionTypes.ADDZONE_REQUEST:
+      return { ...state, isPosting: true };
+    case UserZonesActionTypes.ADDZONE_SUCCESS:
+      return { ...state, isPosting: false, lastPost: new Date() };
+    case UserZonesActionTypes.ADDZONE_FAILURE:
+      return { ...state, isPosting: false };
     default:
       return state;
   }

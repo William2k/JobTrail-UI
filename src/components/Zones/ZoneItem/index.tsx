@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ZoneItem: React.FC<Props> = (props) => {
-  return <div>{props.zone}</div>;
+  return <div>{props.zone.name}</div>;
 };
 
 export default ZoneItem;

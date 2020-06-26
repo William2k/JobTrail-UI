@@ -10,4 +10,11 @@ export interface ZoneResponse {
   active: boolean;
 }
 
+export interface AddZone {
+    name: string;
+    description: string;
+    managerId: string;
+    parentZoneId: string | null;
+}
+
 export interface Zone extends ZoneResponse {}

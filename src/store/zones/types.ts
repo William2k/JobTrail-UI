@@ -4,7 +4,9 @@ import { UserZonesActionTypes } from "./actions";
 
 export interface UserZonesState {
   isFetching: boolean;
+  isPosting: boolean;
   lastFetch: Date | null;
+  lastPost: Date | null;
   zones: Zone[];
 }
 
@@ -22,8 +24,22 @@ export interface GetUserZonesCanceled
 export interface GetUserZonesFailure
   extends Action<UserZonesActionTypes.GETUSERZONES_FAILURE> {}
 
+export interface AddZoneRequest
+  extends Action<UserZonesActionTypes.ADDZONE_REQUEST> {}
+
+export interface AddZoneSuccess
+  extends Action<UserZonesActionTypes.ADDZONE_SUCCESS> {
+  payload: string;
+}
+
+export interface AddZoneFailure
+  extends Action<UserZonesActionTypes.ADDZONE_FAILURE> {}
+
 export type UserZonesActions =
   | GetUserZonesRequest
   | GetUserZonesSuccess
   | GetUserZonesCanceled
-  | GetUserZonesFailure;
+  | GetUserZonesFailure
+  | AddZoneRequest
+  | AddZoneSuccess
+  | AddZoneFailure;
