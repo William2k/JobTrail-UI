@@ -35,7 +35,25 @@ export interface AddZoneSuccess
 export interface AddZoneFailure
   extends Action<UserZonesActionTypes.ADDZONE_FAILURE> {}
 
+export interface GetUserZoneRequest
+  extends Action<UserZonesActionTypes.GETUSERZONE_REQUEST> {}
+
+export interface GetUserZoneSuccess
+  extends Action<UserZonesActionTypes.GETUSERZONE_SUCCESS> {
+  payload: Zone;
+}
+
+export interface GetUserZoneCanceled
+  extends Action<UserZonesActionTypes.GETUSERZONE_CANCELED> {}
+
+export interface GetUserZoneFailure
+  extends Action<UserZonesActionTypes.GETUSERZONE_FAILURE> {}
+
 export type UserZonesActions =
+  | GetUserZoneRequest
+  | GetUserZoneSuccess
+  | GetUserZoneCanceled
+  | GetUserZoneFailure
   | GetUserZonesRequest
   | GetUserZonesSuccess
   | GetUserZonesCanceled

@@ -32,6 +32,17 @@ export default (
       return { ...state, isPosting: false, lastPost: new Date() };
     case UserZonesActionTypes.ADDZONE_FAILURE:
       return { ...state, isPosting: false };
+    case UserZonesActionTypes.GETUSERZONE_REQUEST:
+      return { ...state, isFetching: true };
+    case UserZonesActionTypes.GETUSERZONE_SUCCESS:
+      return {
+        ...state,
+        zones: [...state.zones, action.payload],
+        isFetching: false,
+      };
+    case UserZonesActionTypes.GETUSERZONE_CANCELED:
+    case UserZonesActionTypes.GETUSERZONE_FAILURE:
+      return { ...state, isFetching: false };
     default:
       return state;
   }

@@ -10,12 +10,20 @@ import {
   AddZoneFailure,
   AddZoneSuccess,
   AddZoneRequest,
+  GetUserZoneRequest,
+  GetUserZoneFailure,
+  GetUserZoneSuccess,
 } from "./types";
 import { getCurrentUserSelector } from "../currentUser/selectors";
 import { ZoneResponse, AddZone } from "../../global/models/zone-models";
 import { getUserZonesSelector } from "./selectors";
 
 export enum UserZonesActionTypes {
+  GETUSERZONE_REQUEST = "[GetUserZone] GetUserZone Request",
+  GETUSERZONE_FAILURE = "[GetUserZone] GetUserZone Failure",
+  GETUSERZONE_SUCCESS = "[GetUserZone] GetUserZone Success",
+  GETUSERZONE_CANCELED = "[GetUserZone] GetUserZone Cancel",
+
   GETUSERZONES_REQUEST = "[GetUserZones] GetUserZones Request",
   GETUSERZONES_FAILURE = "[GetUserZones] GetUserZones Failure",
   GETUSERZONES_SUCCESS = "[GetUserZones] GetUserZones Success",
@@ -27,6 +35,27 @@ export enum UserZonesActionTypes {
 }
 
 export const userZonesActions = {
+  getUserZone: (payload: string) => async (
+    dispatch: Dispatch,
+    getState: () => AppState
+  ) => {
+    dispatch({
+      type: UserZonesActionTypes.GETUSERZONE_REQUEST,
+    } as GetUserZoneRequest);
+
+    try{
+      const response = (await axios.get(`zones/${payload}`)) as AxiosResponse<ZoneResponse>;
+
+      dispatch({
+        type: UserZonesActionTypes.GETUSERZONE_SUCCESS,
+        payload: response.data,
+      } as GetUserZoneSuccess);
+    } catch (error) {
+      dispatch({
+        type: UserZonesActionTypes.GETUSERZONE_FAILURE,
+      } as GetUserZoneFailure);
+    }
+  },
   getUserZones: async (dispatch: Dispatch, getState: () => AppState) => {
     const state = getState();
     const currentUser = getCurrentUserSelector(state);
@@ -65,7 +94,7 @@ export const userZonesActions = {
     }
   },
   addZone: (payload: AddZone) => async (
-    dispatch: Dispatch,
+    dispatch: Dispatch<any>,
     getState: () => AppState
   ) => {
     dispatch({
@@ -83,6 +112,8 @@ export const userZonesActions = {
         type: UserZonesActionTypes.ADDZONE_SUCCESS,
         payload: zoneId,
       } as AddZoneSuccess);
+
+      dispatch(userZonesActions.getUserZone(zoneId));
     } catch (error) {
       dispatch({
         type: UserZonesActionTypes.ADDZONE_FAILURE,
