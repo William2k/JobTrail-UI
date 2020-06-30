@@ -4,7 +4,7 @@ import { Route, RouteProps } from "react-router-dom";
 import NotAuthorised from "./NotAuthorised";
 
 interface Props extends RouteProps {
-  component: React.FC;
+  component: React.FC<any>;
   authorised: boolean;
 }
 

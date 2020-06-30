@@ -43,8 +43,10 @@ export const userZonesActions = {
       type: UserZonesActionTypes.GETUSERZONE_REQUEST,
     } as GetUserZoneRequest);
 
-    try{
-      const response = (await axios.get(`zones/${payload}`)) as AxiosResponse<ZoneResponse>;
+    try {
+      const response = (await axios.get(`zones/${payload}`)) as AxiosResponse<
+        ZoneResponse
+      >;
 
       dispatch({
         type: UserZonesActionTypes.GETUSERZONE_SUCCESS,
@@ -78,9 +80,9 @@ export const userZonesActions = {
     } as GetUserZonesRequest);
 
     try {
-      const response = (await axios.get(
-        `zones?userId=${currentUser.user.id}`
-      )) as AxiosResponse<ZoneResponse[]>;
+      const response = (await axios.get(`zones`, {
+        params: { userId: currentUser.user.id },
+      })) as AxiosResponse<ZoneResponse[]>;
       const data = response.data;
 
       dispatch({

@@ -16,6 +16,7 @@ import { currentUserActions } from "../store/currentUser/actions";
 import { useConfig } from "../global/config";
 import Home from "./Home";
 import Zones from "./Zones";
+import ZoneViewer from "./Zones/ZoneViewer";
 
 Axios.defaults.baseURL = useConfig.apiBaseURL;
 
@@ -25,7 +26,6 @@ const App: React.FC = () => {
   useEffect(() => {
     initialiser(dispatch);
     dispatch(currentUserActions.getUser());
-
   }, [dispatch]);
 
   const location = useSelector(getLocationSelector);
@@ -33,7 +33,7 @@ const App: React.FC = () => {
 
   return (
     <>
-    <ReactNotifications />
+      <ReactNotifications />
       <Nav />
       <MainWrapper>
         <TransitionGroup component={null}>
@@ -46,15 +46,20 @@ const App: React.FC = () => {
                 authorised={currentUser.isLoggedIn}
               />
               <PrivateRoute
+                exact
                 path="/zones"
                 component={Zones}
+                authorised={currentUser.isLoggedIn}
+              />
+              <PrivateRoute
+                path="/zones/:zoneId"
+                component={ZoneViewer}
                 authorised={currentUser.isLoggedIn}
               />
             </Switch>
           </CSSTransition>
         </TransitionGroup>
       </MainWrapper>
-      
     </>
   );
 };

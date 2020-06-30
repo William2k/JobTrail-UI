@@ -43,7 +43,7 @@ const Zones: React.FC = () => {
       {userZones && userZones.isFetching ? (
         <h2>Loading Zones</h2>
       ) : (
-        <div>
+        <div className="d-flex">
           {userZones?.zones?.map((zone, i) => (
             <ZoneItem key={i} zone={zone}/>
           ))}
