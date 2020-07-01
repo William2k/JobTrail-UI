@@ -26,30 +26,32 @@ const Zones: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Zones</h1>
-
-      <button
-        className="btn btn-info"
-        onClick={() => setModal(ZoneModal.AddZone)}
-      >
-        Add Zone
-      </button>
-
+    <>
       {modal === ZoneModal.AddZone && (
         <AddZoneModal showModal={true} toggle={handleCloseModal} />
       )}
 
-      {userZones && userZones.isFetching ? (
-        <h2>Loading Zones</h2>
-      ) : (
-        <div className="d-flex">
-          {userZones?.zones?.map((zone, i) => (
-            <ZoneItem key={i} zone={zone}/>
-          ))}
-        </div>
-      )}
-    </div>
+      <div>
+        <h1>Zones</h1>
+
+        <button
+          className="btn btn-info"
+          onClick={() => setModal(ZoneModal.AddZone)}
+        >
+          Add Zone
+        </button>
+
+        {userZones && userZones.isFetching ? (
+          <h2>Loading Zones</h2>
+        ) : (
+          <div className="d-flex">
+            {userZones?.zones?.map((zone, i) => (
+              <ZoneItem key={i} zone={zone} />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -9,15 +9,17 @@ const useForm = <T>(initialValues: T, callback: () => void) => {
     callback();
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     event.persist();
     setValue(event.target.name, event.target.value);
   };
 
   const setValue = (name: string, value: string) => {
-    setValues(values => ({
+    setValues((values) => ({
       ...values,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -27,8 +29,8 @@ const useForm = <T>(initialValues: T, callback: () => void) => {
     handleChange,
     handleSubmit,
     values,
-    setValue, 
-    resetValues
+    setValue,
+    resetValues,
   };
 };
 

@@ -3,11 +3,13 @@ import { JobsActionTypes } from "./actions";
 import { Action } from "redux";
 
 export interface JobMap {
-  job: Job;
-  lastFetch: Date;
+  jobs: Job[];
+  lastFetch: Date | null;
 }
 
 export interface JobsState {
+  isPosting: boolean;
+  lastPost: Date | null;
   current: Map<string, JobMap>;
 }
 

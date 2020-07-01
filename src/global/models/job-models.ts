@@ -17,3 +17,15 @@ export interface JobResponse {
 }
 
 export interface Job extends JobResponse {}
+
+export interface AddJob {
+  name: string;
+  description: string;
+  isRecurring: boolean;
+  priority: Priority;
+  dueDate: string;
+  managerId: string;
+  zoneId: string;
+  assignedUserId: string | null;
+  parentJobId: string | null;
+}

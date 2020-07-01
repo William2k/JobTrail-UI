@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 import AppState from "../state-model";
 import { Dispatch } from "redux";
-import { JobResponse } from "../../global/models/job-models";
+import { JobResponse, AddJob } from "../../global/models/job-models";
 import {
   GetJobRequest,
   GetJobSuccess,
@@ -11,6 +11,9 @@ import {
   GetJobsSuccess,
   GetJobsFailure,
   GetJobsCanceled,
+  AddJobRequest,
+  AddJobSuccess,
+  AddJobFailure,
 } from "./types";
 import { getJobsSelector } from "./selectors";
 import { getCurrentUserSelector } from "../currentUser/selectors";
@@ -50,7 +53,15 @@ export const jobActions = {
       >;
 
       const job = response.data;
-      jobsState.current.set(job.zoneId, { job, lastFetch: new Date() });
+
+      if (jobsState.current.has(job.zoneId)) {
+        jobsState.current.get(job.zoneId)?.jobs.push(job);
+      } else {
+        jobsState.current.set(job.zoneId, {
+          jobs: [job],
+          lastFetch: new Date(),
+        });
+      }
 
       dispatch({
         type: JobsActionTypes.GETJOB_SUCCESS,
@@ -73,7 +84,10 @@ export const jobActions = {
     const date = getOldDate(5);
     const curr = jobsState.current.get(zoneId);
 
-    if (!currentUser.isLoggedIn || (curr && curr.lastFetch > date)) {
+    if (
+      !currentUser.isLoggedIn ||
+      (curr && curr.lastFetch && curr.lastFetch > date)
+    ) {
       return dispatch({
         type: JobsActionTypes.GETJOBS_CANCELED,
       } as GetJobsCanceled);
@@ -91,7 +105,14 @@ export const jobActions = {
       const jobs = response.data;
 
       for (const job of jobs) {
-        jobsState.current.set(job.zoneId, { job, lastFetch: new Date() });
+        if (jobsState.current.has(job.zoneId)) {
+          jobsState.current.get(job.zoneId)?.jobs.push(job);
+        } else {
+          jobsState.current.set(job.zoneId, {
+            jobs: [job],
+            lastFetch: new Date(),
+          });
+        }
       }
 
       dispatch({
@@ -102,6 +123,33 @@ export const jobActions = {
       dispatch({
         type: JobsActionTypes.GETJOBS_FAILURE,
       } as GetJobsFailure);
+    }
+  },
+  addJob: (payload: AddJob) => async (
+    dispatch: Dispatch<any>,
+    getState: () => AppState
+  ) => {
+    dispatch({
+      type: JobsActionTypes.ADDJOB_REQUEST,
+    } as AddJobRequest);
+
+    try {
+      const response = (await axios.post("jobs", payload)) as AxiosResponse<
+        string
+      >;
+
+      const jobId = response.data;
+
+      dispatch({
+        type: JobsActionTypes.ADDJOB_SUCCESS,
+        payload: jobId,
+      } as AddJobSuccess);
+
+      dispatch(jobActions.getJob(jobId));
+    } catch (error) {
+      dispatch({
+        type: JobsActionTypes.ADDJOB_FAILURE,
+      } as AddJobFailure);
     }
   },
 };
