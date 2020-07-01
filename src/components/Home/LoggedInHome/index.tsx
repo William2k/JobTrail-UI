@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getUserSelector } from "../../../store/currentUser/selectors";
 import { getUserZonesSelector } from "../../../store/zones/selectors";
-import { userZonesActions } from "../../../store/zones/actions";
+import { userZoneActions } from "../../../store/zones/actions";
 
 const LoggedInHome: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const LoggedInHome: React.FC = () => {
   const userZones = useSelector(getUserZonesSelector);
 
   useEffect(() => {
-    dispatch(userZonesActions.getUserZones);
+    dispatch(userZoneActions.getUserZones);
   }, [dispatch]);
 
   return (

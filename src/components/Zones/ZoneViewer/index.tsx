@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getUserZonesSelector } from "../../../store/zones/selectors";
 import { Zone } from "../../../global/models/zone-models";
+import { userZoneActions } from "../../../store/zones/actions";
+import { jobActions } from "../../../store/jobs/actions";
 
 interface MatchParams {
-  zoneId?: string;
+  zoneId: string;
 }
 
 interface Props extends RouteComponentProps<MatchParams> {}
@@ -13,13 +15,24 @@ interface Props extends RouteComponentProps<MatchParams> {}
 const ZoneViewer: React.FC<Props> = (props) => {
   const [zone, setZone] = useState({} as Zone);
   const userZones = useSelector(getUserZonesSelector);
+  const dispatch = useDispatch();
+  const zoneId = props.match.params.zoneId;
 
   useEffect(() => {
-    setZone(
-      userZones.zones.find((zone) => zone.id === props.match.params.zoneId) ||
-        ({} as Zone)
+    const current = userZones.zones.find(
+      (zone) => zone.id === zoneId
     );
-  }, [userZones.zones, props.match.params.zoneId]);
+
+    if (!current) {
+      dispatch(userZoneActions.getUserZone(zoneId));
+
+      return;
+    }
+
+    dispatch(jobActions.getJobs(zoneId))
+
+    setZone(current);
+  }, [userZones.zones, zoneId, dispatch]);
 
   return (
     <div>

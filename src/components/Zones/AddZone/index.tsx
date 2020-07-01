@@ -7,7 +7,7 @@ import styles from "./index.module.scss";
 import { Spinner } from "../../_Shared/miniComponents";
 import { getCurrentUserSelector } from "../../../store/currentUser/selectors";
 import { AddZone } from "../../../global/models/zone-models";
-import { userZonesActions } from "../../../store/zones/actions";
+import { userZoneActions } from "../../../store/zones/actions";
 import { getUserZonesSelector } from "../../../store/zones/selectors";
 
 interface Props {
@@ -44,7 +44,7 @@ const AddZoneModal: React.FC<Props> = (props) => {
       return;
     }
 
-    dispatch(userZonesActions.addZone(values));
+    dispatch(userZoneActions.addZone(values));
   };
 
   const clearForm = () => {

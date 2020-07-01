@@ -17,6 +17,7 @@ import {
 import { getCurrentUserSelector } from "../currentUser/selectors";
 import { ZoneResponse, AddZone } from "../../global/models/zone-models";
 import { getUserZonesSelector } from "./selectors";
+import { getOldDate } from "../../global/helpers";
 
 export enum UserZonesActionTypes {
   GETUSERZONE_REQUEST = "[GetUserZone] GetUserZone Request",
@@ -34,8 +35,8 @@ export enum UserZonesActionTypes {
   ADDZONE_SUCCESS = "[AddZone] AddZone Success",
 }
 
-export const userZonesActions = {
-  getUserZone: (payload: string) => async (
+export const userZoneActions = {
+  getUserZone: (zoneId: string) => async (
     dispatch: Dispatch,
     getState: () => AppState
   ) => {
@@ -44,7 +45,7 @@ export const userZonesActions = {
     } as GetUserZoneRequest);
 
     try {
-      const response = (await axios.get(`zones/${payload}`)) as AxiosResponse<
+      const response = (await axios.get(`zones/${zoneId}`)) as AxiosResponse<
         ZoneResponse
       >;
 
@@ -63,8 +64,7 @@ export const userZonesActions = {
     const currentUser = getCurrentUserSelector(state);
     const userZones = getUserZonesSelector(state);
 
-    let date = new Date();
-    date = new Date(date.setMinutes(date.getMinutes() - 5));
+    const date = getOldDate(5);
 
     if (
       !currentUser.isLoggedIn ||
@@ -115,7 +115,7 @@ export const userZonesActions = {
         payload: zoneId,
       } as AddZoneSuccess);
 
-      dispatch(userZonesActions.getUserZone(zoneId));
+      dispatch(userZoneActions.getUserZone(zoneId));
     } catch (error) {
       dispatch({
         type: UserZonesActionTypes.ADDZONE_FAILURE,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getUserZonesSelector } from "../../store/zones/selectors";
-import { userZonesActions } from "../../store/zones/actions";
+import { userZoneActions } from "../../store/zones/actions";
 import ZoneItem from "./ZoneItem";
 import AddZoneModal from "./AddZone";
 
@@ -16,7 +16,7 @@ const Zones: React.FC = () => {
   const userZones = useSelector(getUserZonesSelector);
 
   useEffect(() => {
-    dispatch(userZonesActions.getUserZones);
+    dispatch(userZoneActions.getUserZones);
   }, [dispatch]);
 
   const [modal, setModal] = useState(ZoneModal.None);
