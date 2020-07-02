@@ -49,3 +49,10 @@ export const getOldDate = (min: number) => {
 
   return date;
 };
+
+export const getDaysInMonth = (month: number, year: number) => {
+  return new Array(31)
+    .fill("")
+    .map((v, i) => new Date(year, month, i + 1))
+    .filter((v) => v.getMonth() === month);
+};

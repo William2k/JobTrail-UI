@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { getUserZonesSelector } from "../../../store/zones/selectors";
 import { Zone } from "../../../global/models/zone-models";
 import { userZoneActions } from "../../../store/zones/actions";
-import { jobActions } from "../../../store/jobs/actions";
 import AddJobModal from "../AddJob";
-import { getJobsSelector } from "../../../store/jobs/selectors";
-import JobItem from "./JobItem";
+import CalendarView from "./CalendarView";
 
 enum ZoneViewerModal {
   None,
@@ -27,7 +26,6 @@ const ZoneViewer: React.FC<Props> = (props) => {
   const [zone, setZone] = useState({} as Zone);
   const [modal, setModal] = useState(ZoneViewerModal.None);
   const userZones = useSelector(getUserZonesSelector);
-  const jobs = useSelector(getJobsSelector);
 
   useEffect(() => {
     const current = userZones.zones.find((zone) => zone.id === zoneId);
@@ -37,8 +35,6 @@ const ZoneViewer: React.FC<Props> = (props) => {
 
       return;
     }
-
-    dispatch(jobActions.getJobs(zoneId));
 
     setZone(current);
   }, [userZones.zones, zoneId, dispatch]);
@@ -67,10 +63,9 @@ const ZoneViewer: React.FC<Props> = (props) => {
             Add Job
           </button>
         </div>
-        <div className="d-flex">
-          {jobs.current.get(zoneId)?.jobs.map((job, i) => (
-            <JobItem key={i} job={job} />
-          ))}
+
+        <div>
+          <CalendarView zoneId={zoneId} />
         </div>
       </div>
     </>

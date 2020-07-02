@@ -8,9 +8,9 @@ export interface JobResponse {
   managerId: string;
   priority: Priority;
   parentJobId?: string;
-  dueDate: number;
-  dateCreated: Date;
-  dateModified: Date;
+  dueDate: string;
+  dateCreated: string;
+  dateModified: string;
   active: boolean;
   assignedUserId?: string;
   zoneId: string;
