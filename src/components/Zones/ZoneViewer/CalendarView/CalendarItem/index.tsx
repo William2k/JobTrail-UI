@@ -22,8 +22,8 @@ const CalendarItem: React.FC<Props> = (props) => {
     <Item>
       <span>{props.date.getDate()}</span>
 
-      {props.jobs.map((job) => (
-        <div>
+      {props.jobs.map((job, i) => (
+        <div key={i}>
           <div>{job.name}</div>
         </div>
       ))}

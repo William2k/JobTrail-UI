@@ -46,6 +46,10 @@ const CalendarView: React.FC<Props> = (props) => {
     }
   };
 
+  const handleSelectedDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedDate(e.target.value);
+  };
+
   const { jobs } = useJobs(jobQuery);
 
   return (
@@ -58,15 +62,14 @@ const CalendarView: React.FC<Props> = (props) => {
             className="form-control"
             type="month"
             value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
+            onChange={handleSelectedDateChange}
           />
         </div>
 
-        <div className="form-group w-25">
-          <label htmlFor="current-user-only">Current User Only: </label>
+        <div className="form-group">
+          <label htmlFor="current-user-only">Current User Only </label>
           <input
             id="current-user-only"
-            className="form-control form-check"
             type="checkbox"
             checked={jobQuery.userId != null}
             onChange={handleCurrentUserOnlyChange}
