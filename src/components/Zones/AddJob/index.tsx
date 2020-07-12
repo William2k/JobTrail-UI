@@ -15,7 +15,24 @@ interface Props {
   showModal: boolean;
   zoneId: string;
   toggle: () => void;
+  defaultDate?: Date;
 }
+
+const getCalendarDateString = (date: Date) => {
+  return (
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).substring(
+      ("00" + (date.getMonth() + 1)).length - 2
+    ) +
+    "-" +
+    ("00" + date.getDate()).substring(("00" + date.getDate()).length - 2) +
+    "T" +
+    ("00" + date.getHours()).substring(("00" + date.getHours()).length - 2) +
+    ":" +
+    ("00" + date.getMinutes()).substring(("00" + date.getMinutes()).length - 2)
+  );
+};
 
 const AddJobModal: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
@@ -67,7 +84,9 @@ const AddJobModal: React.FC<Props> = (props) => {
       isRecurring: false,
       priority: Priority.Normal,
       managerId: currentUser.user.id,
-      dueDate: "",
+      dueDate: props.defaultDate
+        ? getCalendarDateString(props.defaultDate)
+        : "",
       zoneId: props.zoneId,
       assignedUserId: null,
       parentJobId: null,

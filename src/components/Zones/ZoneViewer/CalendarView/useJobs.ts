@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios, { AxiosResponse } from "axios";
 
 import { Job } from "../../../../global/models/job-models";
@@ -13,15 +13,19 @@ export interface JobsQuery {
 export const useJobs = (query: JobsQuery) => {
   const [jobs, setJobs] = useState([] as Job[]);
 
-  useEffect(() => {
-    (async () => {
-      const response = (await axios.get("jobs", {
-        params: { ...query },
-      })) as AxiosResponse<Job[]>;
+  const updateJobs = useCallback(async () => {
+    const response = (await axios.get("jobs", {
+      params: { ...query },
+    })) as AxiosResponse<Job[]>;
 
-      setJobs(response.data);
-    })();
+    setJobs(response.data);
   }, [query]);
 
-  return { jobs };
+  useEffect(() => {
+    (async () => {
+      await updateJobs();
+    })();
+  }, [query, updateJobs]);
+
+  return { jobs, updateJobs };
 };

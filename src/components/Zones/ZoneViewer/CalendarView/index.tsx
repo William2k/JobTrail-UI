@@ -5,6 +5,12 @@ import CalendarItem from "./CalendarItem";
 import { useSelector } from "react-redux";
 import { getCurrentUserSelector } from "../../../../store/currentUser/selectors";
 import { useJobs, JobsQuery } from "./useJobs";
+import AddJobModal from "../../AddJob";
+
+enum CalendarViewModal {
+  None,
+  AddJob,
+}
 
 interface Props {
   zoneId: string;
@@ -14,6 +20,9 @@ const CalendarView: React.FC<Props> = (props) => {
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().substring(0, 7)
   );
+
+  const [modal, setModal] = useState(CalendarViewModal.None);
+  const [addJobDate, setAddJobDate] = useState(new Date());
 
   const dates = useMemo(() => {
     const date = new Date(selectedDate);
@@ -50,10 +59,29 @@ const CalendarView: React.FC<Props> = (props) => {
     setSelectedDate(e.target.value);
   };
 
+  const handleCloseModal = () => {
+    setModal(CalendarViewModal.None);
+  };
+
+  const openAddJobs = (date: Date) => {
+    setAddJobDate(date);
+
+    setModal(CalendarViewModal.AddJob);
+  };
+
   const { jobs } = useJobs(jobQuery);
 
   return (
     <div>
+      {modal === CalendarViewModal.AddJob && (
+        <AddJobModal
+          zoneId={props.zoneId}
+          showModal={true}
+          toggle={handleCloseModal}
+          defaultDate={addJobDate}
+        />
+      )}
+
       <div>
         <div className="form-group w-25">
           <label htmlFor="current-date">Current Date: </label>
@@ -81,6 +109,7 @@ const CalendarView: React.FC<Props> = (props) => {
         {dates.map((date, i) => (
           <CalendarItem
             key={i}
+            addJob={openAddJobs}
             jobs={jobs.filter(
               (job) => new Date(job.dueDate).getDate() === date.getDate()
             )}
