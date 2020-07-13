@@ -5,7 +5,7 @@ import { getUserSelector } from "../../../store/currentUser/selectors";
 import { getUserZonesSelector } from "../../../store/zones/selectors";
 import { userZoneActions } from "../../../store/zones/actions";
 
-const LoggedInHome: React.FC = () => {
+const LoggedInHome = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUserSelector);
   const userZones = useSelector(getUserZonesSelector);

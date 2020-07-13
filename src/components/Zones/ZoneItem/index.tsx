@@ -18,7 +18,7 @@ interface Props {
   zone: Zone;
 }
 
-const ZoneItem: React.FC<Props> = (props) => {
+const ZoneItem = (props: Props) => {
   const dispatch = useDispatch();
 
   const openZone = () => {

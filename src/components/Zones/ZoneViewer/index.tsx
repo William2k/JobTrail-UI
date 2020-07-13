@@ -13,7 +13,7 @@ interface MatchParams {
 
 interface Props extends RouteComponentProps<MatchParams> {}
 
-const ZoneViewer: React.FC<Props> = (props) => {
+const ZoneViewer = (props: Props) => {
   const dispatch = useDispatch();
   const zoneId = props.match.params.zoneId;
 

@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import Tooltip from "@material-ui/core/Tooltip";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 import { Job } from "../../../../../global/models/job-models";
 import styles from "./index.module.scss";
+import JobItem from "./JobItem";
 
 interface Props {
   jobs: Job[];
@@ -24,13 +26,19 @@ const Item = styled.div`
   height: 200px;
 `;
 
-const CalendarItem: React.FC<Props> = (props) => {
+const CalendarItem = (props: Props) => {
   props.jobs.sort(
     (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
   );
 
+  const dispatch = useDispatch();
+
   const handleAddJobClick = () => {
     props.addJob(props.date);
+  };
+
+  const openJob = (jobId: string) => {
+    dispatch(push(`/jobs/${jobId}`));
   };
 
   return (
@@ -47,11 +55,7 @@ const CalendarItem: React.FC<Props> = (props) => {
 
       <div className={styles.itemJobsContainer}>
         {props.jobs.map((job, i) => (
-          <Tooltip title={new Date(job.dueDate).toLocaleString()}>
-            <button className={styles.itemJobs + " btn btn-info"} key={i}>
-              <div>{job.name}</div>
-            </button>
-          </Tooltip>
+          <JobItem job={job} openJob={openJob} />
         ))}
       </div>
     </Item>

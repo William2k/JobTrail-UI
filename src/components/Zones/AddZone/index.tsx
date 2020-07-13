@@ -15,7 +15,7 @@ interface Props {
   toggle: () => void;
 }
 
-const AddZoneModal: React.FC<Props> = (props) => {
+const AddZoneModal = (props: Props) => {
   const dispatch = useDispatch();
   const userZones = useSelector(getUserZonesSelector);
   const currentUser = useSelector(getCurrentUserSelector);

@@ -9,14 +9,17 @@ import Nav from "./Nav";
 import MainWrapper from "./_Shared/wrappers/MainWrapper";
 import PrivateRoute from "./PrivateRoute";
 import Account from "./Account";
+import Home from "./Home";
+import Zones from "./Zones";
+import ZoneViewer from "./Zones/ZoneViewer";
+import Jobs from "./Jobs";
+import JobViewer from "./Jobs/JobViewer";
+
 import { getLocationSelector } from "../store/router/selectors";
 import { getCurrentUserSelector } from "../store/currentUser/selectors";
 import initialiser from "../appInitialiser";
 import { currentUserActions } from "../store/currentUser/actions";
 import { useConfig } from "../global/config";
-import Home from "./Home";
-import Zones from "./Zones";
-import ZoneViewer from "./Zones/ZoneViewer";
 
 Axios.defaults.baseURL = useConfig.apiBaseURL;
 
@@ -54,6 +57,17 @@ const App: React.FC = () => {
               <PrivateRoute
                 path="/zones/:zoneId"
                 component={ZoneViewer}
+                authorised={currentUser.isLoggedIn}
+              />
+              <PrivateRoute
+                exact
+                path="/jobs"
+                component={Jobs}
+                authorised={currentUser.isLoggedIn}
+              />
+              <PrivateRoute
+                path="/jobs/:jobId"
+                component={JobViewer}
                 authorised={currentUser.isLoggedIn}
               />
             </Switch>

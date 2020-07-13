@@ -67,7 +67,7 @@ enum NavModal {
   Signup,
 }
 
-const Nav: React.FC = () => {
+const Nav = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserSelector);
   const user = useSelector(getUserSelector);
@@ -104,6 +104,11 @@ const Nav: React.FC = () => {
         <ul className="navbar-nav mr-auto">
           {currentUser.isLoggedIn ? (
             <>
+              <NavItem>
+                <NavLink to="/jobs" className="nav-link">
+                  Jobs
+                </NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink to="/zones" className="nav-link">
                   Zones

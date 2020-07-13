@@ -34,7 +34,7 @@ const getCalendarDateString = (date: Date) => {
   );
 };
 
-const AddJobModal: React.FC<Props> = (props) => {
+const AddJobModal = (props: Props) => {
   const dispatch = useDispatch();
   const jobs = useSelector(getJobsSelector);
   const currentUser = useSelector(getCurrentUserSelector);

@@ -14,7 +14,7 @@ interface Props {
   userSubmited: () => void;
 }
 
-const SignUpModal: React.FC<Props> = (props) => {
+const SignUpModal = (props: Props) => {
   const { notify } = useNotification();
   const [isPosting, setIsPosting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");

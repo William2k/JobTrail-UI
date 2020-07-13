@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ChangeEvent, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 import { getDaysInMonth } from "../../../../global/helpers";
 import CalendarItem from "./CalendarItem";
@@ -16,7 +16,7 @@ interface Props {
   zoneId: string;
 }
 
-const CalendarView: React.FC<Props> = (props) => {
+const CalendarView = (props: Props) => {
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().substring(0, 7)
   );

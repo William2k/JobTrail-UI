@@ -1,19 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
 import { getCurrentUserSelector } from "../../store/currentUser/selectors";
-import LoggedInHome from "./LoggedInHome";
 
-const Home = () => {
+const Jobs = () => {
   const currentUser = useSelector(getCurrentUserSelector);
 
-  return currentUser.isLoggedIn ? (
-    <LoggedInHome />
-  ) : (
+  return (
     <div>
-      <h1>Home</h1>
+      <h1>{currentUser.user.username}'s jobs</h1>{" "}
     </div>
   );
 };
 
-export default Home;
+export default Jobs;

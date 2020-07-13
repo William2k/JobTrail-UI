@@ -22,7 +22,7 @@ const Main = styled(Container)`
   }
 `;
 
-const MainWrapper: React.FC<RouteProps> = (props) => {
+const MainWrapper = (props: RouteProps) => {
   return (
     <Main>
       <main className="page-content">{props.children}</main>

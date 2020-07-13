@@ -14,7 +14,7 @@ interface Props {
   toggle: () => void;
 }
 
-const SignInModal: React.FC<Props> = props => {
+const SignInModal = (props: Props) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserSelector);
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,7 +45,7 @@ const SignInModal: React.FC<Props> = props => {
     {
       username: "",
       password: "",
-      rememberMe: false
+      rememberMe: false,
     } as SignIn,
     signinSubmit
   );
