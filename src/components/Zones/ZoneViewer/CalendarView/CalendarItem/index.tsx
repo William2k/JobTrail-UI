@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import { Job } from "../../../../../global/models/job-models";
 import styles from "./index.module.scss";
@@ -14,7 +15,7 @@ interface Props {
 
 const Item = styled.div`
   background: rgba(0, 0, 0, 0.5);
-  min-width: 200px;
+  width: 200px;
   border: 1px solid white;
   border-radius: 5px;
   margin: 10px;
@@ -44,11 +45,15 @@ const CalendarItem: React.FC<Props> = (props) => {
         />
       </div>
 
-      {props.jobs.map((job, i) => (
-        <div key={i}>
-          <div>{job.name}</div>
-        </div>
-      ))}
+      <div className={styles.itemJobsContainer}>
+        {props.jobs.map((job, i) => (
+          <Tooltip title={new Date(job.dueDate).toLocaleString()}>
+            <button className={styles.itemJobs + " btn btn-info"} key={i}>
+              <div>{job.name}</div>
+            </button>
+          </Tooltip>
+        ))}
+      </div>
     </Item>
   );
 };
