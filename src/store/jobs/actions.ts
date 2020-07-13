@@ -20,19 +20,19 @@ import { getCurrentUserSelector } from "../currentUser/selectors";
 import { getOldDate } from "../../global/helpers";
 
 export enum JobsActionTypes {
-  GETJOB_REQUEST = "[GetJob] GetJob Request",
-  GETJOB_FAILURE = "[GetJob] GetJob Failure",
-  GETJOB_SUCCESS = "[GetJob] GetJob Success",
-  GETJOB_CANCELED = "[GetJob] GetJob Cancel",
+  GETJOB_REQUEST = "@@jobs/GETJOB_REQUEST",
+  GETJOB_FAILURE = "@@jobs/GETJOB_FAILURE",
+  GETJOB_SUCCESS = "@@jobs/GETJOB_SUCCESS",
+  GETJOB_CANCELED = "@@jobs/GETJOB_CANCELED",
 
-  GETJOBS_REQUEST = "[GetJobs] GetJobs Request",
-  GETJOBS_FAILURE = "[GetJobs] GetJobs Failure",
-  GETJOBS_SUCCESS = "[GetJobs] GetJobs Success",
-  GETJOBS_CANCELED = "[GetJobs] GetJobs Cancel",
+  GETJOBS_REQUEST = "@@jobs/GETJOBS_REQUEST",
+  GETJOBS_FAILURE = "@@jobs/GETJOBS_FAILURE",
+  GETJOBS_SUCCESS = "@@jobs/GETJOBS_SUCCESS",
+  GETJOBS_CANCELED = "@@jobs/GETJOBS_CANCELED",
 
-  ADDJOB_REQUEST = "[AddJob] AddJob Request",
-  ADDJOB_FAILURE = "[AddJob] AddJob Failure",
-  ADDJOB_SUCCESS = "[AddJob] AddJob Success",
+  ADDJOB_REQUEST = "@@jobs/ADDJOB_REQUEST",
+  ADDJOB_FAILURE = "@@jobs/ADDJOB_FAILURE",
+  ADDJOB_SUCCESS = "@@jobs/ADDJOB_SUCCESS",
 }
 
 export const jobActions = {

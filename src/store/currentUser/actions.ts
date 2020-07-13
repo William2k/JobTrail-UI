@@ -22,23 +22,23 @@ import {
 } from "./types";
 
 export enum CurrentUserActionTypes {
-  SIGNUP_REQUEST = "[SignUp] SignUp Request",
-  SIGNUP_PASSWORD_FAILURE = "[SignUp] SignUp Password Failure",
-  SIGNUP_FAILURE = "[SignUp] SignUp Failure",
-  SIGNUP_SUCCESS = "[SignUp] SignUp Success",
+  SIGNUP_REQUEST = "@@user/SIGNUP_REQUEST",
+  SIGNUP_PASSWORD_FAILURE = "@@user/SIGNUP_PASSWORD_FAILURE",
+  SIGNUP_FAILURE = "@@user/SIGNUP_FAILURE",
+  SIGNUP_SUCCESS = "@@user/SIGNUP_SUCCESS",
 
-  SIGNIN_REQUEST = "[SignIn] SignIn Request",
-  SIGNIN_FAILURE = "[SignIn] SignIn Failure",
-  SIGNIN_SUCCESS = "[SignIn] SignIn Success",
+  SIGNIN_REQUEST = "@@user/SIGNIN_REQUEST",
+  SIGNIN_FAILURE = "@@user/SIGNIN_FAILURE",
+  SIGNIN_SUCCESS = "@@user/SIGNIN_SUCCESS",
 
-  SIGNOUT_REQUEST = "[SignOut] SignOut Request",
-  SIGNOUT_SUCCESS = "[SignOut] SignOut Success",
-  AUTHENTICATION_FAILED = "[Authentication] Authentication Failed",
+  SIGNOUT_REQUEST = "@@user/SIGNOUT_REQUEST",
+  SIGNOUT_SUCCESS = "@@user/SIGNOUT_SUCCESS",
+  AUTHENTICATION_FAILED = "@@user/AUTHENTICATION_FAILED",
 
-  GETUSER_REQUEST = "[GetUser] GetUser Request",
-  GETUSER_FAILURE = "[GetUser] GetUser Failure",
-  GETUSER_SUCCESS = "[GetUser] GetUser Success",
-  GETUSER_CANCELED = "[GetUser] GetUser Cancel",
+  GETUSER_REQUEST = "@@user/GETUSER_REQUEST",
+  GETUSER_FAILURE = "@@user/GETUSER_FAILURE",
+  GETUSER_SUCCESS = "@@user/GETUSER_SUCCESS",
+  GETUSER_CANCELED = "@@user/GETUSER_CANCELED",
 }
 
 export const currentUserActions = {

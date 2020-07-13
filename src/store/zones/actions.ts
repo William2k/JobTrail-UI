@@ -20,19 +20,19 @@ import { getUserZonesSelector } from "./selectors";
 import { getOldDate } from "../../global/helpers";
 
 export enum UserZonesActionTypes {
-  GETUSERZONE_REQUEST = "[GetUserZone] GetUserZone Request",
-  GETUSERZONE_FAILURE = "[GetUserZone] GetUserZone Failure",
-  GETUSERZONE_SUCCESS = "[GetUserZone] GetUserZone Success",
-  GETUSERZONE_CANCELED = "[GetUserZone] GetUserZone Cancel",
+  GETUSERZONE_REQUEST = "@@zones/GETUSERZONE_REQUEST",
+  GETUSERZONE_FAILURE = "@@zones/GETUSERZONE_FAILURE",
+  GETUSERZONE_SUCCESS = "@@zones/GETUSERZONE_SUCCESS",
+  GETUSERZONE_CANCELED = "@@zones/GETUSERZONE_CANCELED",
 
-  GETUSERZONES_REQUEST = "[GetUserZones] GetUserZones Request",
-  GETUSERZONES_FAILURE = "[GetUserZones] GetUserZones Failure",
-  GETUSERZONES_SUCCESS = "[GetUserZones] GetUserZones Success",
-  GETUSERZONES_CANCELED = "[GetUserZones] GetUserZones Cancel",
+  GETUSERZONES_REQUEST = "@@zones/GETUSERZONES_REQUEST",
+  GETUSERZONES_FAILURE = "@@zones/GETUSERZONES_FAILURE",
+  GETUSERZONES_SUCCESS = "@@zones/GETUSERZONES_SUCCESS",
+  GETUSERZONES_CANCELED = "@@zones/GETUSERZONES_CANCELED",
 
-  ADDZONE_REQUEST = "[AddZone] AddZone Request",
-  ADDZONE_FAILURE = "[AddZone] AddZone Failure",
-  ADDZONE_SUCCESS = "[AddZone] AddZone Success",
+  ADDZONE_REQUEST = "@@zones/ADDZONE_REQUEST",
+  ADDZONE_FAILURE = "@@zones/ADDZONE_FAILURE",
+  ADDZONE_SUCCESS = "@@zones/ADDZONE_SUCCESS",
 }
 
 export const userZoneActions = {
