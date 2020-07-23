@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 
 import { Job } from "../../../../../global/models/job-models";
-import styles from "./index.module.scss";
 import CalendarJobItem from "./CalendarJobItem";
 
 interface Props {
@@ -24,6 +23,17 @@ const Item = styled.div`
   padding: 5px;
   transition: 1s;
   height: 200px;
+
+  .item-date {
+    font-weight: bolder;
+    border-bottom: 2px solid white;
+    color: white;
+  }
+
+  .jobs-container {
+    height: 154px;
+    overflow: auto;
+  }
 `;
 
 const CalendarItem = (props: Props) => {
@@ -43,7 +53,7 @@ const CalendarItem = (props: Props) => {
 
   return (
     <Item>
-      <div className={styles.itemDate}>
+      <div className="item-date">
         {props.date.getDate()}
         <FontAwesomeIcon
           className="float-right"
@@ -53,7 +63,7 @@ const CalendarItem = (props: Props) => {
         />
       </div>
 
-      <div className={styles.itemJobsContainer}>
+      <div className="jobs-container">
         {props.jobs.map((job, i) => (
           <CalendarJobItem key={i} job={job} openJob={openJob} />
         ))}

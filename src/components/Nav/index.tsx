@@ -16,7 +16,6 @@ import {
   getUserSelector,
   getCurrentUserSelector,
 } from "../../store/currentUser/selectors";
-import styles from "./index.module.scss";
 import SignInModal from "../_Shared/modals/signin";
 import SignUpModal from "../_Shared/modals/signup";
 
@@ -124,7 +123,8 @@ const Nav = () => {
             <>
               <NavItem>
                 <span
-                  className={`${styles.modalLink} nav-link`}
+                  className="nav-link"
+                  role="button"
                   onClick={() => setModal(NavModal.Signin)}
                 >
                   Signin
@@ -132,7 +132,8 @@ const Nav = () => {
               </NavItem>
               <NavItem>
                 <span
-                  className={`${styles.modalLink} nav-link`}
+                  className="nav-link"
+                  role="button"
                   onClick={() => setModal(NavModal.Signup)}
                 >
                   Signup

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useForm = <T>(initialValues: T, callback: () => void) => {
+export const useForm = <T>(initialValues: T, callback: () => void) => {
   const [values, setValues] = useState(initialValues);
 
   const handleSubmit = (event: React.FormEvent) => {

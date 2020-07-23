@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 
 import useForm from "../../hooks/useForm";
-import styles from "./index.module.scss";
 import { Spinner } from "../../miniComponents";
 import { SignIn } from "../../../../global/models/user-models";
 import { currentUserActions } from "../../../../store/currentUser/actions";
@@ -13,6 +13,14 @@ interface Props {
   showModal: boolean;
   toggle: () => void;
 }
+
+const SignInModalStyle = styled(Modal)`
+  color: #004e97;
+
+  .error-message {
+    color: rgb(134, 0, 0);
+  }
+`;
 
 const SignInModal = (props: Props) => {
   const dispatch = useDispatch();
@@ -51,7 +59,7 @@ const SignInModal = (props: Props) => {
   );
 
   return (
-    <Modal className={styles.signin} isOpen={props.showModal} toggle={toggle}>
+    <SignInModalStyle isOpen={props.showModal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Sign in</ModalHeader>
       <ModalBody>
         <form id="signin-form" onSubmit={handleSubmit}>
@@ -103,7 +111,7 @@ const SignInModal = (props: Props) => {
         </form>
       </ModalBody>
       <ModalFooter>
-        <div className={styles.errorMessage}>{errorMessage}</div>
+        <div className="error-message">{errorMessage}</div>
         <Button color="danger" onClick={toggle}>
           Cancel
         </Button>
@@ -120,7 +128,7 @@ const SignInModal = (props: Props) => {
           {currentUser.isFetching && <Spinner />}
         </Button>
       </ModalFooter>
-    </Modal>
+    </SignInModalStyle>
   );
 };
 

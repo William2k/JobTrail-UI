@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import axios from "axios";
+import styled from "styled-components";
 
 import useForm from "../../hooks/useForm";
-import styles from "./index.module.scss";
 import { Spinner } from "../../miniComponents";
 import { SignUp } from "../../../../global/models/user-models";
 import useNotification, { NotificationType } from "../../hooks/useNotification";
+
 
 interface Props {
   showModal: boolean;
   toggle: () => void;
   userSubmited: () => void;
 }
+
+const SignUpModalStyle = styled(Modal)`
+  color: #004e97;
+
+  .error-message {
+    color: rgb(134, 0, 0);
+  }
+`;
 
 const SignUpModal = (props: Props) => {
   const { notify } = useNotification();
@@ -83,7 +92,7 @@ const SignUpModal = (props: Props) => {
   );
 
   return (
-    <Modal className={styles.signup} isOpen={props.showModal} toggle={toggle}>
+    <SignUpModalStyle isOpen={props.showModal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Sign up</ModalHeader>
       <ModalBody>
         <form id="signup-form" onSubmit={handleSubmit}>
@@ -189,7 +198,7 @@ const SignUpModal = (props: Props) => {
         </form>
       </ModalBody>
       <ModalFooter>
-        <div className={styles.errorMessage}>{errorMessage}</div>
+        <div className="error-message">{errorMessage}</div>
         <Button color="danger" onClick={toggle}>
           Cancel
         </Button>
@@ -206,7 +215,7 @@ const SignUpModal = (props: Props) => {
           {isPosting && <Spinner />}
         </Button>
       </ModalFooter>
-    </Modal>
+    </SignUpModalStyle>
   );
 };
 
