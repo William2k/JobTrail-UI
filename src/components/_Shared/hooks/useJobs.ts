@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios, { AxiosResponse } from "axios";
 
-import { Job } from "../../../../global/models/job-models";
+import { Job } from "../../../global/models/job-models";
 
 export interface JobsQuery {
   userId?: string;

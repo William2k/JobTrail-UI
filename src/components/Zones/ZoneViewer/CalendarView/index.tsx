@@ -4,7 +4,7 @@ import { getDaysInMonth } from "../../../../global/helpers";
 import CalendarItem from "./CalendarItem";
 import { useSelector } from "react-redux";
 import { getCurrentUserSelector } from "../../../../store/currentUser/selectors";
-import { useJobs, JobsQuery } from "./useJobs";
+import { useJobs, JobsQuery } from "../../../_Shared/hooks/useJobs";
 import AddJobModal from "../../AddJob";
 
 enum CalendarViewModal {

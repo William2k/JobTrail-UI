@@ -7,7 +7,7 @@ import { push } from "connected-react-router";
 
 import { Job } from "../../../../../global/models/job-models";
 import styles from "./index.module.scss";
-import JobItem from "./JobItem";
+import CalendarJobItem from "./CalendarJobItem";
 
 interface Props {
   jobs: Job[];
@@ -55,7 +55,7 @@ const CalendarItem = (props: Props) => {
 
       <div className={styles.itemJobsContainer}>
         {props.jobs.map((job, i) => (
-          <JobItem job={job} openJob={openJob} />
+          <CalendarJobItem key={i} job={job} openJob={openJob} />
         ))}
       </div>
     </Item>
